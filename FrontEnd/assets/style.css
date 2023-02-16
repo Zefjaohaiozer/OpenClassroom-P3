@@ -22,11 +22,16 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
+}
+a{
+	text-decoration: inherit;
+	color: inherit;
 }
 body {
 	line-height: 1;
@@ -54,9 +59,11 @@ body {
 	font-size: 14px;
 }
 header {
+	
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 50px 0;
+	margin-top: 0px;
 }
 section {
 	margin: 50px 0
@@ -98,38 +105,39 @@ nav li {
 li:hover {
 	color: #B1663C;
 }
-#introduction {
+.introDiv {
 	display: flex;
 	align-items: center;
 }
-#introduction figure {
+.introDiv figure {
 	flex: 1
 }
-#introduction img {
+.introDiv img {
 	display: block;
 	margin: auto;
 	width: 80%;
 }
 
-#introduction article {
+.introDiv article {
 	flex: 1
 }
-#introduction h2 {
+.introDiv h2 {
 	margin-bottom: 1em;
 }
 
-#introduction p {
+.introDiv p {
 	margin-bottom: 0.5em;
 }
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
+	
 }
 
 .filters{
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
+	
 }
 .filterButton{
 	background-color: white;
@@ -142,13 +150,18 @@ li:hover {
 	font-size: 16px;
 	line-height: 19px;
 	text-align: center;
+	margin: 10px;
+	height: 40px;
+	min-width: 100px;
+	padding-left: 10px;
+	padding-right: 10px;
+
 	
 }
 .filterButton:hover{
 	background-color: #1D6154;
 	color: white;
-	
-
+	cursor: pointer;
 }
 .gallery {
 	width: 100%;
@@ -211,3 +224,97 @@ footer nav ul {
 	margin: 2em
 }
 
+/* Style des éléments d'édition */
+.header{
+	display: inline-flex;
+	flex-wrap: wrap;
+	width: 100%;
+	flex-direction: column-reverse;
+}
+
+.editBanner{
+	display: flex;
+	width: 100%;
+	flex-wrap: wrap;
+	justify-content: center;
+	background-color: black;
+	margin: 0px;
+	margin-bottom: 15px;
+	height: 60px;
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 19px;
+	color: white;
+	
+	
+}
+.publishBtn{
+	border-radius: 60px;
+	background-color: white;
+	height: 40px;
+	width: auto;
+	padding-left:25px ;
+	padding-right:25px ;
+	margin-left: 20px;
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+	text-align: center;
+}
+.editBannerElement{
+	margin-top: auto;
+	margin-bottom: auto;
+}
+.titleAndNav{
+	display: inline-flex;
+	width: 100%;
+	
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+
+.introduction{
+	display: inline-flex;
+	flex-wrap: wrap;
+	
+	flex-direction: column-reverse;
+
+	
+}
+
+.editProfilePicPrompt{
+	width: 50%;
+	margin-left: 5%;
+	margin-top: 20px;
+	justify-content: space-evenly;
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 16px;
+	
+}
+
+.worksTitleDiv{
+	display: flex;
+	height: 60px;
+	flex-direction: row;
+	justify-content: center;
+	align-items:center;
+}
+
+.editWorksBtn{
+	
+	margin-left: 5%;
+	
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 16px;
+}
