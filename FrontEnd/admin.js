@@ -21,9 +21,9 @@ header.appendChild(editBanner);
 function addProfilePicModifierBtn(){
 
     const editProfilePicPrompt = document.createElement("div");
-    editProfilePicPrompt.innerHTML =`<p class="editProfilePicInnerText">
+    editProfilePicPrompt.innerHTML =`<p class="editProfilePicInnerText"><a href="#modale" class="openModale">
         <i class="fa fa-light fa-pen-to-square"></i> 
-        modifier</p>
+        modifier </a></p>
         `;
     editProfilePicPrompt.setAttribute("id","editProfilePicPrompt");
     editProfilePicPrompt.className="editProfilePicPrompt";
@@ -36,9 +36,9 @@ addProfilePicModifierBtn();
 
 function addWorksModifierBtn(){
     const editWorksBtn = document.createElement("p");
-    editWorksBtn.innerHTML =`
+    editWorksBtn.innerHTML =`<a href="#modale" class="openModale">
         <i class="fa fa-light fa-pen-to-square"></i> 
-        modifier
+        modifier </a>
         `;
     editWorksBtn.setAttribute("id","editWorksBtn");
     editWorksBtn.className="editWorksBtn";
@@ -58,8 +58,11 @@ function destroyEditPage(){
     editBanner.remove();
     
     const editProfilePicPrompt = document.getElementById("editProfilePicPrompt");
+    const editWorksPrompt = document.getElementById('editWorksBtn');
     if(editProfilePicPrompt != null){
         editProfilePicPrompt.remove();
+        editWorksPrompt.remove();
         console.log("profilePicPrompt détruit avec succès.");
+
     }
 }
