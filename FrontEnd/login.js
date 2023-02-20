@@ -1,16 +1,16 @@
-import{load, destroyHeader} from "./header.js";
-export {main, showLogin, exterminate, destroyLogin};
+import{load, destroyHeader, showMainPage} from "./header.js";
+export {main, showLogin, exterminate, destroyLogin, showLogin};
 
-
+let loginAttempt=0;
 const main = document.getElementById("main");   
+createLogin();
 
-async function showLogin(){
+async function createLogin(){
     
-    exterminate();
-        
     const loginSection = document.createElement("section");
     loginSection.className = "loginSection";
     loginSection.setAttribute("id","loginSection");
+    loginSection.style.display = "none";
     
     const loginH2 = document.createElement("h2");
     loginH2.innerText = "Log-In";
@@ -21,7 +21,7 @@ async function showLogin(){
     loginForm.setAttribute("method","POST");
     
     
-    const loginEmailText = document.createElement("p");
+    const loginEmailText = document.createElement("label");
     loginEmailText.innerText="E-mail";
 
 
@@ -32,7 +32,7 @@ async function showLogin(){
     loginId.setAttribute("name","emailId")
  
     
-    const loginPwdText = document.createElement("p");
+    const loginPwdText = document.createElement("label");
     loginPwdText.innerText = "Mot de Passe";
         
     const loginPwd = document.createElement("input");
@@ -48,6 +48,16 @@ async function showLogin(){
     loginSubmit.setAttribute("value", "Se Connecter")
     loginSubmit.setAttribute("type","submit");
 
+
+    const forgotPwd = document.createElement("p");
+    forgotPwd.className="forgotPwd";
+    forgotPwd.setAttribute("id","forgotPwd");
+    forgotPwd.innerHTML = `
+        <a href="#" class="forgotPwdLink">
+            Mot de passe oublié
+        </a>
+    `
+
     main.appendChild(loginSection);
 
     loginSection.appendChild(loginH2);
@@ -57,6 +67,7 @@ async function showLogin(){
     loginForm.appendChild(loginPwdText);
     loginForm.appendChild(loginPwd);
     loginForm.appendChild(loginSubmit);
+    loginSection.appendChild(forgotPwd);
     
     const loginFormulaire = document.getElementById("loginForm");
     if(loginFormulaire == null){
@@ -75,15 +86,24 @@ async function showLogin(){
     });
 };
 
+const showLogin = function(){
+    exterminate();
+    const loginSection = document.getElementById("loginSection");
+    loginSection.style.display = null;
+}
+
 
 //    on retire le HTML du catalogue, de l'intro et des contacts, qui ne sont pas présents sur le formulaire de connexion
 function exterminate(){
     const portfolio = document.querySelector("#portfolio");
     const introduction = document.querySelector("#introduction");
     const contact = document.querySelector("#contact");
-    introduction.innerHTML= ""; 
-    portfolio.innerHTML= "";
-    contact.innerHTML="";
+    // introduction.innerHTML= ""; 
+    // portfolio.innerHTML= "";
+    // contact.innerHTML="";
+    portfolio.style.display = "none";
+    introduction.style.display = "none";
+    contact.style.display="none";
     console.log("DoctOOOOr");
 
    }
@@ -92,12 +112,14 @@ function exterminate(){
    function destroyLogin(){
 
     const loginSection = document.querySelector(".loginSection");
+    
 
     if(loginSection == null){
         console.log("I'm not doing anything");
     }
     else{
-        loginSection.remove();
+        // loginSection.remove();
+        loginSection.style.display = "none";
         console.log("Login Destruction confirmed");
     }
     
@@ -121,7 +143,7 @@ async function getFormInfo(){
         method : 'POST',
        
         headers:{
-            'Accept': 'application/json',
+            'Accept': 'applicationnp/json',
             'Content-Type': 'application/json'
         },
 
@@ -140,13 +162,21 @@ async function getFormInfo(){
         localStorage.setItem("userData", JSON.stringify(serverLoginResponse));
         const data = localStorage.getItem("userData");
         console.log(data);
-        destroyHeader();
-        load();
+        // destroyHeader();
+        showMainPage();
+        loginAttempt = 0;
     }
     else{
+        loginAttempt = loginAttempt+1;
 
         const userNotFound = document.createElement("p");
-        userNotFound.innerText="L'utilisateur n'existe pas, vérifiez votre adresse email et votre mot de passe";
+        if(loginAttempt<10){
+        userNotFound.innerText=`L'utilisateur n'existe pas, vérifiez votre adresse email et votre mot de passe. Vous avez essayé de vous connecter ${loginAttempt} fois.`;
+        }
+        else{
+            userNotFound.innerText=`Trop de tentatives de connexion.`;
+            showMainPage();
+        }
         userNotFound.className="userNotFound";
         userNotFound.setAttribute("id","userNotFound");
         const loginSection = document.getElementById("loginSection");

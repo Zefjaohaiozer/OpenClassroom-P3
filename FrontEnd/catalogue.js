@@ -1,9 +1,12 @@
-const reponse = await fetch('http://localhost:5678/api/works');
-const works = await reponse.json();
-export {works, reponse, showPortfolio};
-function showPortfolio(){
+let reponse = await fetch('http://localhost:5678/api/works');
+let works = await reponse.json();
 
-    const catalogue = document.querySelector("#portfolio");
+export {works, reponse, createPortfolio, showPortfolio, filterCat, destroyPortfolio,updateWorks as updateWorksAfterDeletion};
+
+
+const filterCat = [] ;
+const catalogue = document.querySelector("#portfolio");
+function createPortfolio(){
 
     const worksTitleDiv = document.createElement("div");
     worksTitleDiv.className ="worksTitleDiv";
@@ -16,18 +19,29 @@ function showPortfolio(){
     const gallery = document.createElement("div");
     gallery.className = "gallery";
 
-    catalogue.style.display="inherit";
+    catalogue.style.display=null;
 
+    
     catalogue.appendChild(worksTitleDiv);
     worksTitleDiv.appendChild(worksTitle);
     catalogue.appendChild(filters);
     catalogue.appendChild(gallery);
     console.log("catalogue.js a chargé le contenu")
     const sectionWorks = document.querySelector(".gallery");
-            const divFilters = document.querySelector(".filters");
-            const filterCat = [] ;
+    const divFilters = document.querySelector(".filters");
+    
 
 
+    const editWorksBtn = document.createElement("p");
+    editWorksBtn.innerHTML =`<a href="#modale" class="openModale">
+        <i class="fa fa-light fa-pen-to-square"></i> 
+        modifier </a>
+        `;
+    editWorksBtn.setAttribute("id","editWorksBtn");
+    editWorksBtn.className="editWorksBtn";
+    editWorksBtn.style.display="none";
+
+    worksTitleDiv.appendChild(editWorksBtn);
 
     // console.log(works);
 
@@ -37,6 +51,7 @@ function showPortfolio(){
         const work = works[i];
         
         const workElement = document.createElement("figure");
+        workElement.setAttribute("id",`galleryFigureNumber${work.id}`);
 
         const imageWork= document.createElement("img");
         imageWork.src = work.imageUrl;
@@ -49,9 +64,7 @@ function showPortfolio(){
         sectionWorks.appendChild(workElement);
         workElement.appendChild(imageWork);
         workElement.appendChild(titleWork)
-
-
-    
+  
 
         }
 }
@@ -130,3 +143,16 @@ genererFiltres(works);
 
 };
 
+const showPortfolio = function(){
+    console.log(catalogue);
+    catalogue.setAttribute("style", "display = null");
+}
+
+function destroyPortfolio(){
+    catalogue.innerHTML="";
+
+};
+
+function updateWorks(workId){
+    works = works.filter((work) => work.id !== workId);
+}

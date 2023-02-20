@@ -104,6 +104,7 @@ nav li {
 
 li:hover {
 	color: #B1663C;
+	cursor: pointer;
 }
 .introDiv {
 	display: flex;
@@ -186,23 +187,29 @@ margin: auto;
 #contact h2{
 	margin-bottom: 20px;
 }
-#contact form {
+#contact form{
 	text-align: left;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
 }
 
-#contact input {
+#contact input, .loginForm input, .addWorkTitle {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact label {
+.addWorkForm select {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+#contact label, .loginForm label, .addWorkForm label {
 	margin: 2em 0 1em 0;
 }
-#contact textarea {
+#contact textarea, .loginForm textarea, .addWorkForm textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
@@ -213,11 +220,22 @@ input[type="submit"]{
 	color: white;
 	background-color: #1D6154;
 	margin : 2em auto ;
+	line-height: 20px;
 	width: 180px;
 	text-align: center;
 	border-radius: 60px ;
-}
+	border-style: none;
+	height: 40px;
 
+}
+input[type="submit"]:hover{
+	cursor: pointer;
+	background-color: white;
+	color: #1D6154;
+	border-style: solid;
+	border-color: #1D6154;
+	
+}
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
@@ -229,11 +247,13 @@ footer nav ul {
 	display: inline-flex;
 	flex-wrap: wrap;
 	width: 100%;
-	flex-direction: column-reverse;
+	flex-direction: column;
 }
+
 
 .editBanner{
 	display: flex;
+
 	width: 100%;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -340,6 +360,191 @@ footer nav ul {
 	padding:20px;
 	overflow: auto;
 	animation : slideFromTop 0.3s both;
+}
+.loginSection{
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	
+}
+.loginForm, .addWorkForm{
+	display: flex;
+	flex-direction: column;
+	height: auto;
+	justify-content: space-around;
+	width: 40%;
+}
+.loginForm p{
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+	color: #3D3D3D;
+}
+
+.forgotPwdLink{
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+	text-decoration-line: underline;
+
+	color: #3D3D3D;
+}
+.userNotFound{
+	color: red;
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	margin-top: 10px;
+}
+
+.modale{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.modaleTitle{
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 26px;
+	line-height: 30px;
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 30px;
+}
+
+.closeModale{
+	float: right;
+
+}
+.closeModale:hover{
+	cursor: pointer;
+	border-style: solid;
+
+}
+.modaleContentCatalogue{
+	
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	width: 80%;
+	margin: auto;
+	
+	
+}
+.workModFigure{
+	width: 19%;
+	margin-right: 1%;
+	height: auto;
+	margin-bottom: 10px;
+	position: relative;
+}
+.workModImage{
+	width: 100%;
+    min-width: auto;
+    object-position: center;
+    object-fit: cover;
+	
+}
+.modaleContentAddWorks{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 80%;
+	border-top: 1px solid #B3B3B3;
+	margin: auto;
+}
+.modaleContentAddWorks a {
+	color: red;
+}
+
+.trashSymbolImgDiv{
+	position: absolute;
+	top:5px;
+	right: 5px;
+	border-radius: 2px;
+	background-color: black;
+	color: white;
+	width: auto;
+	height: auto;
+	padding: 7px;
+	}
+.trashSymbolImgDiv a{
+	margin: auto;
+}
+
+.expandSymbolDiv{
+	position: absolute;
+	top:5px;
+	right: 35px;
+	border-radius: 2px;
+	background-color: black;
+	color: white;
+	width: auto;
+	height: auto;
+	padding: 7px;
+}
+.expandSymbolDiv a{
+	margin: auto;
+}
+
+.modale2{
+	display: flex;
+	position: relative;
+	flex-direction: column;
+
+}
+.arrowLeft{
+	float :left;
+}
+.divAjoutPhotos{
+	width: 70%;
+	margin: auto;
+	align-items: center;
+	justify-content: center;
+	width: 80%;
+	
+	margin: auto;
+
+}
+.picAddSquare{
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 180px;
+	background-color: #E8F1F7;
+}
+.addWorkForm{
+	width: 100%;
+}
+.validerAjoutPhotos{
+	height: auto;
+	display: flex;
+	padding-top: 140px;
+	font-size: 1.2em;
+	border-top:1px solid #B3B3B3;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+.hrLineAddWorkForm{
+	width: 50%;
+	margin-top: 20px;
+
+	background-color: #B3B3B3;
+	border-style: solid;
+	border-color: #B3B3B3;
+	
 }
 
 

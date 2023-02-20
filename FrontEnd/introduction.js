@@ -1,7 +1,7 @@
 
-function showIntro(){
+function createIntro(){
 const introduction = document.querySelector("#introduction");
-introduction.style.display="flex";
+
 
 const introDiv = document.createElement("div");
 introDiv.className = "introDiv";
@@ -27,5 +27,8 @@ introDiv.appendChild(presentation);
 
 
 }
-
-export{showIntro};
+const showIntro = function(){
+        const introduction = document.querySelector("#introduction");
+        introduction.style.display=null;
+}
+export{createIntro, showIntro};

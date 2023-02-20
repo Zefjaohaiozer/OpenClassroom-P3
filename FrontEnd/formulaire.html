@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>Sophie Bluel - Architecte d'intérieur</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/e1a783ce50.js" crossorigin="anonymous"></script>
+	<meta name="description" content="Site internet de Sophie Bluel, Photographe">
+
+	<link rel="stylesheet" href="./assets/style.css">
+
+	
+	
+</head>
+<body>
+<header>
+	
+</header>
+<main id="main">
+    <aside id = "modale" class="modale" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="modaleTitle"  >
+        <div class="modale-wrapper modale-stop" >
+        <a href="#" class="closeModale"><i class="fa-solid fa-x"></i></a>
+        <div class="modale1" style="display:none">
+            <h3 class = "modaleTitle" id="modaleTitle">
+                Galerie Photo
+            </h3>
+            <div class="modaleContentCatalogue" id="modaleContentCatalogue">
+            
+            </div> 
+            <div class="modaleContentAddWorks" id="modaleContentAddworks">
+                
+                <input type="submit" value="Ajouter une photo" id="picAddBtn"></input>
+                <a href="#">Supprimer la galerie</a>
+            </div>
+        </div>
+        <div class="modale2" >
+            <a href="#" class="arrowLeft"> <i class="fa fa-light fa-arrow-left"></i></a>
+            <h3 class = "modaleTitle" id="modaleTitle">
+                Ajout photo
+            </h3>
+                <div class="divAjoutPhotos" id="divAjoutPhotos">
+                    <div class="picAddSquare">
+                    </div>
+                    <div class="divAddWork">
+                        <div class="addWorkFormDiv">
+                          <form class="addWorkForm" method="post" action="#">
+                            <label>Titre</label>
+                            <input class="addWorkTitle"></input>
+                            <label>Catégorie</label>
+                            <select type="select" class="selectCategory">
+                              <option value=""></option>
+                            </select>
+                            <hr class="hrLineAddWorkForm">
+                            <input type="submit" value="Ajouter Photo"  id="confirmAddWork">
+                          </form>
+                        </div>
+                      </div>
+                      
+                           
+                </div>
+        
+
+            
+    
+    </aside>
+        
+    `
+</main>
+
+<footer>
+
+</footer>
+</body>
+</html>

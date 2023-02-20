@@ -10,7 +10,9 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(helmet());
+app.use(helmet({
+      crossOriginResourcePolicy: false,
+    }));
 app.use('/images', express.static(path.join(__dirname, 'images')))
 
 const db = require("./models");
@@ -23,4 +25,3 @@ app.use('/api/categories', categoriesRoutes);
 app.use('/api/works', worksRoutes);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 module.exports = app;
-

@@ -1,22 +1,8 @@
 import { works } from "./catalogue.js";
-
 console.log("admin.js en chargement");
-export{editPage, destroyEditPage};
-
-async function editPage(){
+export{destroyEditPage, showEditPage};
 
 
-    editBanner.innerHTML= `
-   <p class="editBannerElement"> 
-   <i class="fa fa-light fa-pen-to-square"></i> 
-   Mode Edition</p>
-
-   <button id="publishChange" class="publishBtn editBannerElement">publier les changements</button>
-
-`
- 
-const header = document.querySelector("header");
-header.appendChild(editBanner);
 
 function addProfilePicModifierBtn(){
 
@@ -34,35 +20,32 @@ function addProfilePicModifierBtn(){
 }
 addProfilePicModifierBtn();
 
-function addWorksModifierBtn(){
-    const editWorksBtn = document.createElement("p");
-    editWorksBtn.innerHTML =`<a href="#modale" class="openModale">
-        <i class="fa fa-light fa-pen-to-square"></i> 
-        modifier </a>
-        `;
-    editWorksBtn.setAttribute("id","editWorksBtn");
-    editWorksBtn.className="editWorksBtn";
 
-    const worksSection = document.querySelector(".worksTitleDiv");
-    worksSection.appendChild(editWorksBtn);
-    
-}
-
-setTimeout(addWorksModifierBtn,0);
 
 console.log("admin.js a chargé");
-};
+;
 
 function destroyEditPage(){
     
-    editBanner.remove();
+    editBanner.style.display = "none";
     
     const editProfilePicPrompt = document.getElementById("editProfilePicPrompt");
     const editWorksPrompt = document.getElementById('editWorksBtn');
-    if(editProfilePicPrompt != null){
-        editProfilePicPrompt.remove();
-        editWorksPrompt.remove();
+    if(editWorksPrompt != null){
+    if(editProfilePicPrompt.style.display != "none" && editWorksPrompt.style.display != "none"){
+        editProfilePicPrompt.style.display = "none";
+        editWorksPrompt.style.display = "none";
         console.log("profilePicPrompt détruit avec succès.");
 
     }
+}
+}
+
+function showEditPage(){
+    editBanner.style.display = null;
+    const editProfilePicPrompt = document.getElementById("editProfilePicPrompt");
+    const editWorksPrompt = document.getElementById('editWorksBtn');
+    editProfilePicPrompt.style.display = null;
+    editWorksPrompt.style.display = null;
+
 }

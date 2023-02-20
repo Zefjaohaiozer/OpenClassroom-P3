@@ -1,6 +1,8 @@
+export{createContact, showContact};
 
-function showContact(){
-document.querySelector("#contact").innerHTML=`<h2 id="contactTest">Contact </h2>
+const contactSection = document.querySelector("#contact")
+function createContact(){
+contactSection.innerHTML=`<h2 id="contactTest">Contact </h2>
 <p>Vous avez un projet ? Discutons-en !</p>
 <form action="#" method="post">
     <label for="name">Nom</label>
@@ -14,6 +16,9 @@ document.querySelector("#contact").innerHTML=`<h2 id="contactTest">Contact </h2>
 document.getElementById("contact").style.display="inherit";
 };
 
-export{showContact};
+const showContact = function(){
+    contactSection.style.display = null ; 
+}
+
 
 
