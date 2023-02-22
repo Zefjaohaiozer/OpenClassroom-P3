@@ -79,7 +79,7 @@ function load(){
     
     createContact();
     
-    console.log("Travail Terminé!");
+    // console.log("Travail Terminé!");
 };
 
 

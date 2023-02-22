@@ -1,5 +1,5 @@
 import{load, destroyHeader, showMainPage} from "./header.js";
-export {main, showLogin, exterminate, destroyLogin, showLogin};
+export {main, showLogin, exterminate, destroyLogin};
 
 let loginAttempt=0;
 const main = document.getElementById("main");   
@@ -71,14 +71,14 @@ async function createLogin(){
     
     const loginFormulaire = document.getElementById("loginForm");
     if(loginFormulaire == null){
-        console.log("le formulaire n'existe pas");
+        // console.log("le formulaire n'existe pas");
     }
     else{
-        console.log("le formulaire existe");
+        // console.log("le formulaire existe");
     }
     loginFormulaire.addEventListener("submit",function(event){
         event.preventDefault();
-        console.log("preventDefault");
+        // console.log("preventDefault");
         destroyUserNotFound();
 
         getFormInfo();
@@ -104,7 +104,7 @@ function exterminate(){
     portfolio.style.display = "none";
     introduction.style.display = "none";
     contact.style.display="none";
-    console.log("DoctOOOOr");
+    // console.log("DoctOOOOr");
 
    }
 
@@ -115,12 +115,12 @@ function exterminate(){
     
 
     if(loginSection == null){
-        console.log("I'm not doing anything");
+        // console.log("I'm not doing anything");
     }
     else{
         // loginSection.remove();
         loginSection.style.display = "none";
-        console.log("Login Destruction confirmed");
+        // console.log("Login Destruction confirmed");
     }
     
 }
@@ -128,11 +128,11 @@ function exterminate(){
 async function getFormInfo(){
     
     const loginFormulaire = document.getElementById("loginForm");
-    console.log("formulaire envoyé!");
+    // console.log("formulaire envoyé!");
     const loginIdSent = loginFormulaire.querySelector('input[name="emailId"]').value;
     const pwdIdSent = loginFormulaire.querySelector('input[name="pwdId"]').value;
-    console.log(loginIdSent); // on montre l'ID
-    console.log(pwdIdSent); // on montre le mdp
+    // console.log(loginIdSent); // on montre l'ID
+    // console.log(pwdIdSent); // on montre le mdp
     const jsonLogin = {
         "email" : loginIdSent,
         "password": pwdIdSent
@@ -143,7 +143,7 @@ async function getFormInfo(){
         method : 'POST',
        
         headers:{
-            'Accept': 'applicationnp/json',
+            'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
 
@@ -154,14 +154,14 @@ async function getFormInfo(){
 
     const serverLoginResponse = await serverLoginAccess.json();
     const serverLoginStatus =  serverLoginAccess.status;
-    console.log(serverLoginStatus);
-    console.log(serverLoginResponse);
+    // console.log(serverLoginStatus);
+    // console.log(serverLoginResponse);
 
     if (serverLoginStatus == 200){
-        console.log("connexion en cours");
+        // console.log("connexion en cours");
         localStorage.setItem("userData", JSON.stringify(serverLoginResponse));
         const data = localStorage.getItem("userData");
-        console.log(data);
+        // console.log(data);
         // destroyHeader();
         showMainPage();
         loginAttempt = 0;
@@ -182,7 +182,7 @@ async function getFormInfo(){
         const loginSection = document.getElementById("loginSection");
         loginSection.appendChild(userNotFound);
 
-        console.log("utilisateur introuvable");
+        // console.log("utilisateur introuvable");
     };
     
 };

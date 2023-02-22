@@ -1,5 +1,5 @@
 import { works } from "./catalogue.js";
-console.log("admin.js en chargement");
+// console.log("admin.js en chargement");
 export{destroyEditPage, showEditPage};
 
 
@@ -22,7 +22,7 @@ addProfilePicModifierBtn();
 
 
 
-console.log("admin.js a chargé");
+// console.log("admin.js a chargé");
 ;
 
 function destroyEditPage(){
@@ -32,10 +32,10 @@ function destroyEditPage(){
     const editProfilePicPrompt = document.getElementById("editProfilePicPrompt");
     const editWorksPrompt = document.getElementById('editWorksBtn');
     if(editWorksPrompt != null){
-    if(editProfilePicPrompt.style.display != "none" && editWorksPrompt.style.display != "none"){
+    if(editProfilePicPrompt.style.display != "none" || editWorksPrompt.style.display != "none"){
         editProfilePicPrompt.style.display = "none";
         editWorksPrompt.style.display = "none";
-        console.log("profilePicPrompt détruit avec succès.");
+        // console.log("profilePicPrompt détruit avec succès.");
 
     }
 }

@@ -1,6 +1,6 @@
 let reponse = await fetch('http://localhost:5678/api/works');
 let works = await reponse.json();
-
+// console.log(works);
 export {works, reponse, createPortfolio, showPortfolio, filterCat, destroyPortfolio,updateWorks as updateWorksAfterDeletion};
 
 
@@ -26,7 +26,7 @@ function createPortfolio(){
     worksTitleDiv.appendChild(worksTitle);
     catalogue.appendChild(filters);
     catalogue.appendChild(gallery);
-    console.log("catalogue.js a chargé le contenu")
+    // console.log("catalogue.js a chargé le contenu")
     const sectionWorks = document.querySelector(".gallery");
     const divFilters = document.querySelector(".filters");
     
@@ -144,7 +144,7 @@ genererFiltres(works);
 };
 
 const showPortfolio = function(){
-    console.log(catalogue);
+    // console.log(catalogue);
     catalogue.setAttribute("style", "display = null");
 }
 

@@ -1,11 +1,12 @@
-import{works,createPortfolio, showPortfolio, filterCat, destroyPortfolio, updateWorksAfterDeletion} from "./catalogue.js";
+import{works,createPortfolio, showPortfolio, destroyPortfolio, updateWorksAfterDeletion} from "./catalogue.js";
 import{showEditPage} from "./admin.js";
 
 let modale = null;
-const focusableSelector = "button, a, input, textarea";
+let focusableSelector;
 let focusableElement = [];
 let previouslyFocusedElement = null;
-
+let arrayMods;
+let destroyGalleryFigure;
 
 
 const stopPropagation = function(e){
@@ -13,19 +14,19 @@ const stopPropagation = function(e){
 }
 function openModale(e){
    e.preventDefault();
-   console.log("Modale défaut prévenu");
+//    console.log("Modale défaut prévenu");
    modale = document.querySelector(e.target.getAttribute("href"));
 
-   console.log("lien modale trouvé");
-   focusableElement = Array.from(modale.querySelectorAll(focusableSelector));
+//    console.log("lien modale trouvé");
+   
     previouslyFocusedElement = document.querySelector(':focus');
    modale.style.display = null;
-   console.log("display modale modifié")
+//    console.log("display modale modifié")
    modale.removeAttribute('aria-hidden');
    modale.setAttribute('aria-modal','true');
    modale.addEventListener('click',closeModale);
    const closeButton = modale.querySelector('.closeModale');
-   console.log(closeButton);
+//    console.log(closeButton);
    closeButton.addEventListener('click',closeModale);
    const stopProp = modale.querySelector('.modale-stop');
    stopProp.addEventListener('click',stopPropagation);
@@ -33,13 +34,13 @@ function openModale(e){
 
 
 const closeModale = function(e){
-    console.log(modale);
+    // console.log(modale);
     if (modale === null) return
     if (previouslyFocusedElement !== null) previouslyFocusedElement.focus();
     e.preventDefault();
-    console.log("Modale Close défaut prévenu");
+    // console.log("Modale Close défaut prévenu");
     modale.style.display = "none";
-    console.log("display modale annulé")
+    // console.log("display modale annulé")
     modale.setAttribute('aria-hidden','true');
     modale.removeAttribute('aria-modal');
     modale.removeEventListener('click',closeModale);
@@ -83,16 +84,16 @@ function createModale(){
                     <div class="divAddWork">
                     <div class="addWorkFormDiv">
                     <form class="addWorkForm" method="post">
-                    <div class="picAddSquare" id="dropZone">
+                    <div class="dropzone" id="dropzone" >
                     <i class="fa fa-thin fa-image faAddImgSquare"></i>
-                    <input type="file" Photo accept="image/png, image/jpeg"> </input>
+                    <label class="addImgLabel"><p>+ Ajouter Photo </p><input type="file" accept="image/png, image/jpeg" name="image" id="imageInput"> </input></label>
                     <p> jpg, png: 4mo max</p>
                     </div>
                       
                         <label>Titre</label>
-                        <input class="addWorkTitle" name="newWorkTitle"></input>
+                        <input class="addWorkTitle" name="title"></input>
                         <label>Catégorie</label>
-                        <select type="select" class="selectCategory" name="newWorkCategory">
+                        <select type="select" class="selectCategory" name="category">
                           <option value=""></option>
                         </select>
                         <hr class="hrLineAddWorkForm">
@@ -111,7 +112,7 @@ function createModale(){
 
     
     addEventListeners();
-    
+    addPostListener();
     listenBtnPhoto();
     listenArrowLeft();
     genererCategories();
@@ -121,11 +122,9 @@ function createModale(){
 }
 
 createModale();
-
 showMainModale();
 genererWorksModifiables();
-// addPostListener();
-// dragAndDropFunction();
+addImgChangeListener();
 
 
 function addEventListeners(){
@@ -157,6 +156,8 @@ function showPicAdd(){
 
     picAddDiv.style.display = null;
     modaleMain.style.display = "none";
+    
+    
 }
 function showMainModale(){
     const picAddDiv = document.querySelector(".modale2");
@@ -169,10 +170,13 @@ function showMainModale(){
 
 const focusinModal = function(e){
     e.preventDefault();
-    console.log(focusableElement);
+    
+    focusableSelector = "button, a, input, textarea, select";
+    focusableElement = Array.from(modale.querySelectorAll(focusableSelector));
+    // console.log(focusableElement);
 
     let index = focusableElement.findIndex(f => f === modale.querySelector(':focus'));
-    console.log(index);
+    // console.log(index);
     if(e.shiftKey === true){
         index--   
     }
@@ -199,9 +203,10 @@ window.addEventListener('keydown',function(e){
     }
 });
 
+
 function genererWorksModifiables(){
 
-    let arrayMods = [];
+   arrayMods = [];
 
     for (let i = 0 ; i < works.length; i++){ 
         // console.log(works[i]);
@@ -242,6 +247,9 @@ function genererWorksModifiables(){
         trashButton.addEventListener("click",deleteWork);
     }
 
+    
+
+    }
     async function deleteWork(event){
         event.preventDefault();
         const userInfo = JSON.parse(localStorage.getItem("userData"));
@@ -254,8 +262,8 @@ function genererWorksModifiables(){
         
         const destroyShowDiv = this.parentNode;
         const destroyShowElement = destroyShowDiv.parentNode;
-        console.log(destroyShowElement);
-        const destroyGalleryFigure = document.getElementById(`galleryFigureNumber${workId}`);
+        // console.log(destroyShowElement);
+        destroyGalleryFigure = document.getElementById(`galleryFigureNumber${workId}`);
 
         destroyShowElement.remove();
         destroyGalleryFigure.remove();
@@ -267,10 +275,9 @@ function genererWorksModifiables(){
                 'Authorization':`Bearer ${userToken}`
             }
         }
-        )
+        )  
 
-    }
-    
+    selfDestruct();
 
 function selfDestruct(){
     const selfDestructBtn = document.getElementById("selfDestructBtn");
@@ -283,7 +290,7 @@ async function deleteAll(event){
  for (let i = 0 ; i < works.length; i++){ 
     const currentItem = works[i];
     const currentItemId = currentItem.id;
-    console.log(currentItemId);
+    // console.log(currentItemId);
 
 
     const destroyGalleryFigure = document.getElementById(`galleryFigureNumber${currentItemId}`);
@@ -328,66 +335,160 @@ async function deleteAll(event){
 
 
 
-function genererCategories(){
+async function genererCategories(){
 
-    console.log(filterCat);
-
+    const getCat = await fetch('http://localhost:5678/api/categories');
+    const catList = await getCat.json();
+    // console.log(catList)
     // on utilise l'Array créé précédemment pour créer les boutons des catégories 
-    for (let i = 0 ; i < filterCat.length; i++){
+    for (let i = 0 ; i < catList.length; i++){
         const selectCategory = document.querySelector(".selectCategory");
         // création des boutons et attributions de classes et ID pour ces boutons 
         const categorie = document.createElement("option");
         categorie.className = `selectCategoryElement`;
-        categorie.id= `${filterCat[i]}`
-        categorie.value = filterCat[i];
-        categorie.innerText = `${filterCat[i]}`;
+        categorie.id= `${catList[i].name}`;
+        categorie.value = catList[i].id;
+        categorie.innerText = `${catList[i].name}`;
         selectCategory.appendChild(categorie);
     }};
 
 
-// on crée la fonction drag&Drop 
-// const dragAndDropFunction = function(){
-//     dropzone = document.getElementById("dropZone");
-//     dropzone.setAttribute("ondrop","drop(e)");
-//     dropzone.setAttribute("ondragover","allowDrop(e)");
-// }
 
-// function allowDrop(e){
-//     e.preventDefault();
-// }
-// function drag(e){
-//     e.dataTransfer.setData("img", e.target.id);
-
-// }
-
-// function drop(e){
-//     e.preventDefault();
-//     const data = e.dataTransfer.getData("img");
-//     e.target.appendChild(document.getElementById(data));
+function addPostListener(){
+    const addWorkForm = document.querySelector(".addWorkForm");
+    addWorkForm.addEventListener("submit",postWork)};
     
-// }
-// function addPostListener(){
-//     const addWorkForm = document.querySelector(".addWorkForm");
-//     addWorkForm.addEventListener("submit",function(event){
-//         event.preventDefault();
-//         postWork()
-//     });
-//     }
-//     function postWork(){
-//         console.log("comportement par défault prévenu")
-//         const postFormulaire = document.querySelector(".addWorkForm");
-//         console.log("formulaire envoyé!");
-//         const titleSent = postFormulaire.querySelector('input[name="newWorkTitle"]').value;
-//         const categorySent = postFormulaire.querySelector('select[name="newWorkCategory"]').value;
-//         console.log(titleSent); // on montre le titre
-//         console.log(categorySent); // on montre la catégorie
-//         const jsonPostNewWork = {
-//             "title" : titleSent,
-//             "categoryId": categorySent,
-//             "id":newWorkId
-//     }
-//     console.log(jsonPostNewWork);
-// }
+function addImgChangeListener(){
+    const imgInput = document.querySelector('input[name="image"]');
+    
+    imgInput.addEventListener("change",function(event){
+        event.preventDefault();
+        const imageDiv = document.getElementById("dropzone");
+        const imgFontAwesome = imageDiv.querySelector(".fa");
+        imgFontAwesome.style.display = 'none';
+        
+        const imgDivLabel = imageDiv.querySelector("label");
+        const imgDivLabelP = imgDivLabel.querySelector("p");
+        const imgDivLabelPreviousImg = imgDivLabel.querySelector("img");
+        if (imgDivLabelP != null){
+            imgDivLabelP.remove();
+        }
+        if (imgDivLabelPreviousImg != null){
+            imgDivLabelPreviousImg.remove();
+        }
+        // imgDivLabel.innerHTML='<input type="file" accept="image/png, image/jpeg" name="image" id="imageInput"> </input>';
+        imgDivLabel.setAttribute('class','imgDivLabel');
+        const imgDivText = imageDiv.querySelector("p");
+        imgDivText.style.display = 'none';
+        const newImgDisplay = document.createElement("img");
+        
+        const imgUrl = imgInput.files[0];
+        
+        newImgDisplay.src = URL.createObjectURL(imgUrl);
+        newImgDisplay.className="newImgDisplay";
+
+        addImgChangeListener()
+        imgDivLabel.appendChild(newImgDisplay);
+        console.log(imgInput.files[0]);
+
+    })
+    
+}
 
 
-selfDestruct();
+
+function postWork(event){
+        event.preventDefault();
+        const addWorkForm = document.querySelector(".addWorkForm");
+
+        const formData = new FormData(addWorkForm)
+
+        const userToken = JSON.parse(localStorage.getItem("userData")).token;
+        const userId = JSON.parse(localStorage.getItem("userData")).userId;
+        console.log(formData);
+        // console.log(userToken);
+                
+                
+                
+        fetch("http://localhost:5678/api/works",
+        {
+            method : 'POST',
+            headers : {
+                'Authorization':`Bearer ${userToken}`,
+                'Accept':'application/json',
+                },
+            body:formData
+        })
+        
+        .then(res => res.json())
+        .then(res => createElementAfterAdding(res))
+        .then(res => console.log(res))  
+        
+// ajout de la nouvelle photo à la mainmodale
+        
+
+
+
+        }
+
+
+function createElementAfterAdding(res){
+        const newWorkId = res.id; 
+        const newWorkImg = res.imageUrl
+        const newWorkTitle = res.title 
+        console.log(newWorkId, newWorkImg, newWorkTitle);
+
+        const cataModale = document.querySelector(".modaleContentCatalogue");
+
+
+        const workModElement = document.createElement("figure");
+        workModElement.className="workModFigure";
+        workModElement.id=`workModIdNumber${newWorkId}`;
+        
+        
+        const imageWorkMod = document.createElement("img");
+        imageWorkMod.src = newWorkImg;
+        imageWorkMod.crossOrigin="anonymous";
+        imageWorkMod.className="workModImage";
+
+        const editImgBtn = document.createElement("figcaption");
+        editImgBtn.innerHTML = `<a href="#">éditer</a>`;
+        
+        const trashButtonDiv = document.createElement("div");
+        trashButtonDiv.className="trashSymbolImgDiv";
+
+        const trashButton = document.createElement("a");
+        
+        trashButton.setAttribute("href","#");
+        trashButton.id=`trashButtonNb${newWorkId}`;
+        trashButton.innerHTML=`<i class="fa fa-light fa-trash-can"></i>`;
+        cataModale.appendChild(workModElement);
+        workModElement.appendChild(imageWorkMod);
+        workModElement.appendChild(editImgBtn);  
+        workModElement.appendChild(trashButtonDiv);
+        trashButtonDiv.appendChild(trashButton);
+
+        trashButton.addEventListener("click",deleteWork);
+
+        const workElement = document.createElement("figure");
+        workElement.setAttribute("id",`galleryFigureNumber${newWorkId}`);
+
+        const imageWork= document.createElement("img");
+        imageWork.src = newWorkImg;
+        imageWork.crossOrigin="anonymous";
+        
+        const titleWork = document.createElement("figcaption");
+        titleWork.innerText = newWorkTitle;
+
+        const sectionWorks = document.querySelector(".gallery");
+
+        sectionWorks.appendChild(workElement);
+        workElement.appendChild(imageWork);
+        workElement.appendChild(titleWork);
+
+
+        showMainModale()
+}
+
+
+
