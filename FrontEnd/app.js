@@ -516,7 +516,42 @@ function showMainModale() {
 
 }
 
-
+function recreateForm(){
+    const modale2 = document.querySelector(".modale2");
+    modale2.innerHTML=`
+    
+    
+    <a href="#" class="arrowLeft"> <i class="fa fa-light fa-arrow-left"></i></a>
+            <h3 class = "modaleTitle" id="modaleTitle">
+                Ajout photo
+            </h3>
+                <div class="divAjoutPhotos" id="divAjoutPhotos">
+                   
+                    <div class="divAddWork">
+                    <div class="addWorkFormDiv">
+                    <form class="addWorkForm" method="post">
+                    <div class="dropzone" id="dropzone" >
+                    <i class="fa fa-thin fa-image faAddImgSquare"></i>
+                    <label class="addImgLabel"><p>+ Ajouter Photo </p><input type="file" accept="image/png, image/jpeg" name="image" id="imageInput" required> </input></label>
+                    <p> jpg, png: 4mo max</p>
+                    </div>
+                      
+                        <label>Titre</label>
+                        <input class="addWorkTitle" name="title" required></input>
+                        <label>Catégorie</label>
+                        <select type="select" class="selectCategory" name="category" required>
+                          <option value=""></option>
+                        </select>
+                        <hr class="hrLineAddWorkForm">
+                        <input type="submit" value="Ajouter Photo"  id="confirmAddWork">
+                      </form>
+                    </div>
+                  </div>
+                  `
+    addImgChangeListener();  
+    addPostListener();  
+    genererCategories();                   
+}
 const focusinModal = function(e) {
     e.preventDefault();
 
@@ -764,6 +799,7 @@ function postWork(event) {
 
 // ajout de la nouvelle photo à la mainmodale et au catalogue
 function createElementAfterAdding(res) {
+    recreateForm();
     const newWorkId = res.id;
     const newWorkImg = res.imageUrl
     const newWorkTitle = res.title
