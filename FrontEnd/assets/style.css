@@ -271,6 +271,7 @@ li:hover {
 	width: 100%;
 	min-height: 100%;
 	object-fit: cover;
+	height: 40vh;
 
 }
 
@@ -578,8 +579,7 @@ footer nav ul {
 
 .workModImage {
 	width: 100%;
-	min-height: 90%;
-
+	min-height: 94%;
 	object-position: center;
 	object-fit: cover;
 
@@ -643,12 +643,11 @@ footer nav ul {
 }
 
 .divAjoutPhotos {
-	width: 70%;
+	
 	margin: auto;
 	align-items: center;
 	justify-content: center;
 	width: 80%;
-
 	margin: auto;
 
 }
@@ -741,7 +740,12 @@ footer nav ul {
 	object-fit: cover;
 }
 
-
+.addWorkFormMandatoryStar{
+	color: red;
+}
+.addWorkLabel{
+	display: flex;
+}
 /* animations  */
 @keyframes fadeIn {
 	from {

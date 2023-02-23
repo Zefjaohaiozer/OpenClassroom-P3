@@ -103,8 +103,6 @@ function createPortfolio() {
     // Il faut aller chercher les catégories existantes, puis ne les afficher qu'une fois par occurrence 
     // on crée un Array pour lister les catégories, puis on valide l'absence de la valeur dans l'Array avant d'y ajouter la valeur, pour n'avoir qu'une fois chaque catégorie, of course
     function genererFiltres() {
-
-
         for (let i = 0; i < works.length; i++) {
             const work = works[i];
             if (!filterCat.includes(work.category.name)) {
@@ -112,8 +110,6 @@ function createPortfolio() {
             }
 
         }
-        // console.log(filterCat);
-
         const noFilterBtn = document.createElement("button");
         noFilterBtn.className = `filterButton`;
         noFilterBtn.id = "noFilter";
@@ -135,22 +131,11 @@ function createPortfolio() {
             filterElement.id = `${filterCat[i]}`
             filterElement.innerText = filterCat[i];
             divFilters.appendChild(filterElement);
-
-            // test console pour valider le fonctionnement de la fonction 
-            // console.log(filterElement);
-
-
-            // ajout d'un listener de click sur chaque bouton créé par la boucle, afin de filtrer correctement selon l'ID du bouton 
             filterElement.addEventListener("click", function() {
-
-                // création d'une variable btnId qui prend l'ID du filterElement concerné 
                 const btnId = this.id;
-
-                // création d'un tableau filWork, ou travaux filtrés, qui ne prend que les éléments de la DB dont la catégorie name correspond précisément à l'ID du bouton 
                 const filWork = works.filter(function(work) {
                     return work.category.name == btnId;
                 });
-
 
                 // on supprime le contenu HTML de la gallery pour la recréer ensuite, mais avec une nouvelle variable dans notre fonction : filWork, le tableau fraichement créé pour cet usage. 
                 document.querySelector(".gallery").innerHTML = "";
@@ -430,13 +415,13 @@ function createModale() {
                     <form class="addWorkForm" method="post">
                     <div class="dropzone" id="dropzone" >
                     <i class="fa fa-thin fa-image faAddImgSquare"></i>
-                    <label class="addImgLabel"><p>+ Ajouter Photo </p><input type="file" accept="image/png, image/jpeg" name="image" id="imageInput" required> </input></label>
+                    <label class="addImgLabel"><p>+ Ajouter Photo </p><p class="addWorkFormMandatoryStar">*</p><input type="file" accept="image/png, image/jpeg" name="image" id="imageInput" required> </input></label>
                     <p> jpg, png: 4mo max</p>
                     </div>
                       
-                        <label>Titre</label>
+                        <label class="addWorkLabel"><p>Titre</p> <p class="addWorkFormMandatoryStar">*</p></label>
                         <input class="addWorkTitle" name="title" required></input>
-                        <label>Catégorie</label>
+                        <label class="addWorkLabel"><p>Catégorie</p><p class="addWorkFormMandatoryStar">*</p></label>
                         <select type="select" class="selectCategory" name="category" required>
                           <option value=""></option>
                         </select>
@@ -458,10 +443,8 @@ function createModale() {
     addEventListeners();
     addPostListener();
     listenBtnPhoto();
-    listenArrowLeft();
+   
     genererCategories();
-
-
 
 }
 
@@ -498,11 +481,9 @@ function listenArrowLeft() {
 function showPicAdd() {
     const picAddDiv = document.querySelector(".modale2");
     const modaleMain = document.querySelector(".modale1");
-
+    listenArrowLeft();
     picAddDiv.style.display = null;
     modaleMain.style.display = "none";
-
-
 }
 
 function showMainModale() {
@@ -511,9 +492,6 @@ function showMainModale() {
 
     picAddDiv.style.display = "none";
     modaleMain.style.display = null;
-
-
-
 }
 
 function recreateForm(){
@@ -722,8 +700,6 @@ async function genererCategories() {
     }
 };
 
-
-
 function addPostListener() {
     const addWorkForm = document.querySelector(".addWorkForm");
     addWorkForm.addEventListener("submit", postWork)
@@ -765,8 +741,6 @@ function addImgChangeListener() {
     })
 
 }
-
-
 
 function postWork(event) {
     event.preventDefault();
@@ -926,11 +900,11 @@ async function createLogin() {
     loginSection.appendChild(forgotPwd);
 
     const loginFormulaire = document.getElementById("loginForm");
-    if (loginFormulaire == null) {
-        // console.log("le formulaire n'existe pas");
-    } else {
-        // console.log("le formulaire existe");
-    }
+    // if (loginFormulaire == null) {
+    //     // console.log("le formulaire n'existe pas");
+    // } else {
+    //     // console.log("le formulaire existe");
+    // }
     loginFormulaire.addEventListener("submit", function(event) {
         event.preventDefault();
         // console.log("preventDefault");
@@ -950,27 +924,20 @@ const showLogin = function() {
 
 //    on retire le HTML du catalogue, de l'intro et des contacts, qui ne sont pas présents sur le formulaire de connexion
 function exterminate() {
-
-    // introduction.innerHTML= ""; 
-    // portfolio.innerHTML= "";
-    // contact.innerHTML="";
     portfolio.style.display = "none";
     introduction.style.display = "none";
     contact.style.display = "none";
     // console.log("DoctOOOOr");
-
 }
 
 //    on empêche le HTML du login de se démultiplier.
 function destroyLogin() {
 
     const loginSection = document.querySelector(".loginSection");
-
-
     if (loginSection == null) {
         // console.log("I'm not doing anything");
     } else {
-        // loginSection.remove();
+       
         loginSection.style.display = "none";
         // console.log("Login Destruction confirmed");
     }
@@ -980,11 +947,10 @@ function destroyLogin() {
 async function getFormInfo() {
 
     const loginFormulaire = document.getElementById("loginForm");
-    // console.log("formulaire envoyé!");
+    
     const loginIdSent = loginFormulaire.querySelector('input[name="emailId"]').value;
     const pwdIdSent = loginFormulaire.querySelector('input[name="pwdId"]').value;
-    // console.log(loginIdSent); // on montre l'ID
-    // console.log(pwdIdSent); // on montre le mdp
+   
     const jsonLogin = {
         "email": loginIdSent,
         "password": pwdIdSent
@@ -1005,20 +971,13 @@ async function getFormInfo() {
 
     const serverLoginResponse = await serverLoginAccess.json();
     const serverLoginStatus = serverLoginAccess.status;
-    // console.log(serverLoginStatus);
-    // console.log(serverLoginResponse);
-
+ 
     if (serverLoginStatus == 200) {
-        // console.log("connexion en cours");
         localStorage.setItem("userData", JSON.stringify(serverLoginResponse));
-        const data = localStorage.getItem("userData");
-        // console.log(data);
-        // destroyHeader();
         showMainPage();
         loginAttempt = 0;
     } else {
         loginAttempt = loginAttempt + 1;
-
         const userNotFound = document.createElement("p");
         if (loginAttempt < 10) {
             userNotFound.innerText = `L'utilisateur n'existe pas, vérifiez votre adresse email et votre mot de passe. Vous avez essayé de vous connecter ${loginAttempt} fois.`;
@@ -1031,7 +990,6 @@ async function getFormInfo() {
         const loginSection = document.getElementById("loginSection");
         loginSection.appendChild(userNotFound);
 
-        // console.log("utilisateur introuvable");
     };
 
 };
