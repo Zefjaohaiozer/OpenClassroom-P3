@@ -224,9 +224,7 @@ const showHeader = function() {
 }
 
 // on détermine une fonction qui permet de charger la page principale, elle sera appelée au lancement de la page 
-
 // Cette fonction crée chaque élément, tout en vérifiant si l'utilisateur est connecté ou non 
-
 function load() {
     createPortfolio();
     createHeader();
@@ -238,7 +236,6 @@ function load() {
 
 
 // une fois la page chargée, on appelle la fonction qui affichera tous les éléments de la homepage
-
 const showMainPage = function() {
     showHeader();
     showIntro();
@@ -246,6 +243,7 @@ const showMainPage = function() {
     showContact();
     destroyLogin();
 }
+
 // on écrit les fonctions qui créent le scroll vers le catalogue ou les contacts : 
 function scrollToPortfolio() {
     catalogue.scrollIntoView({
@@ -481,13 +479,13 @@ function recreateForm(){
                     <form class="addWorkForm" method="post">
                     <div class="dropzone" id="dropzone" >
                     <i class="fa fa-thin fa-image faAddImgSquare"></i>
-                    <label class="addImgLabel"><p>+ Ajouter Photo </p><input type="file" accept="image/png, image/jpeg" name="image" id="imageInput" required> </input></label>
+                    <label class="addImgLabel"><p>+ Ajouter Photo </p><p class="addWorkFormMandatoryStar">*</p><input type="file" accept="image/png, image/jpeg" name="image" id="imageInput" required> </input></label>
                     <p> jpg, png: 4mo max</p>
                     </div>
                       
-                        <label>Titre</label>
+                        <label class="addWorkLabel"><p>Titre</p> <p class="addWorkFormMandatoryStar">*</p></label>
                         <input class="addWorkTitle" name="title" required></input>
-                        <label>Catégorie</label>
+                        <label class="addWorkLabel"><p>Catégorie</p><p class="addWorkFormMandatoryStar">*</p></label>
                         <select type="select" class="selectCategory" name="category" required>
                           <option value=""></option>
                         </select>

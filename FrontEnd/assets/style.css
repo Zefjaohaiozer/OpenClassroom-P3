@@ -579,9 +579,10 @@ footer nav ul {
 
 .workModImage {
 	width: 100%;
-	min-height: 94%;
+	
 	object-position: center;
 	object-fit: cover;
+	height: 16vh;
 
 }
 
