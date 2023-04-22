@@ -78,7 +78,11 @@ function createPortfolio() {
       workElement.setAttribute('id', `galleryFigureNumber${work.id}`);
 
       const imageWork = document.createElement('img');
-      imageWork.src = work.imageUrl;
+      const newImageUrl = work.imageUrl.replace(
+        'http://localhost:5678',
+        'https://p3.arthurpellissier.com'
+      );
+      imageWork.src = newImageUrl;
       imageWork.crossOrigin = 'anonymous';
 
       const titleWork = document.createElement('figcaption');
@@ -529,7 +533,11 @@ function genererWorksModifiables() {
     arrayMods.push(workModElement.id);
 
     const imageWorkMod = document.createElement('img');
-    imageWorkMod.src = workMod.imageUrl;
+    const newImageUrl = workMod.imageUrl.replace(
+      'http://localhost:5678',
+      'https://p3.arthurpellissier.com'
+    );
+    imageWorkMod.src = newImageUrl;
     imageWorkMod.crossOrigin = 'anonymous';
     imageWorkMod.className = 'workModImage';
 
