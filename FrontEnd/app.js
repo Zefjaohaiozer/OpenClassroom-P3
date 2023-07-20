@@ -587,13 +587,13 @@ async function deleteWork(event) {
   destroyShowElement.remove();
   destroyGalleryFigure.remove();
 
-  // const sendDeleteRequest = await fetch(`/api/works/${workId}`, {
-  //   method: 'DELETE',
-  //   headers: {
-  //     Accept: '*/*',
-  //     Authorization: `Bearer ${userToken}`,
-  //   },
-  // });
+  const sendDeleteRequest = await fetch(`/api/works/${workId}`, {
+    method: 'DELETE',
+    headers: {
+      Accept: '*/*',
+      Authorization: `Bearer ${userToken}`,
+    },
+  });
   // On met à jour la variable works en fonction de la nouvelle BDD des travaux
   updateWorks();
 }
@@ -611,26 +611,26 @@ async function deleteAll(event) {
   const userInfo = JSON.parse(localStorage.getItem('userData'));
   const userToken = userInfo.token;
   updateWorks();
-  // for (let i = 0; i < works.length; i++) {
-  //   const currentItem = works[i];
-  //   const currentItemId = currentItem.id;
-  //   // console.log(currentItemId);
-  //   const destroyGalleryFigure = document.getElementById(
-  //     `galleryFigureNumber${currentItemId}`
-  //   );
-  //   destroyGalleryFigure.remove();
-  //   const cataModale = document.querySelector('.modaleContentCatalogue');
-  //   const sendDeleteRequest = await fetch(`/api/works/${currentItemId}`, {
-  //     method: 'DELETE',
-  //     headers: {
-  //       Accept: '*/*',
-  //       Authorization: `Bearer ${userToken}`,
-  //     },
-  //   });
-  //   if (cataModale != null) {
-  //     cataModale.remove();
-  //   }
-  // }
+  for (let i = 0; i < works.length; i++) {
+    const currentItem = works[i];
+    const currentItemId = currentItem.id;
+    // console.log(currentItemId);
+    const destroyGalleryFigure = document.getElementById(
+      `galleryFigureNumber${currentItemId}`
+    );
+    destroyGalleryFigure.remove();
+    const cataModale = document.querySelector('.modaleContentCatalogue');
+    const sendDeleteRequest = await fetch(`/api/works/${currentItemId}`, {
+      method: 'DELETE',
+      headers: {
+        Accept: '*/*',
+        Authorization: `Bearer ${userToken}`,
+      },
+    });
+    if (cataModale != null) {
+      cataModale.remove();
+    }
+  }
   updateWorks(); // on finit en mettant à jour la variable works.
 }
 
